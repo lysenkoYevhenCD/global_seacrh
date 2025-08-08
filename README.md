@@ -1,69 +1,36 @@
-# React + TypeScript + Vite
+# Frontend Resources
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+We use the following libraries and versions for React development:
 
-Currently, two official plugins are available:
+- typescript >= 5.0
+- react >= 18.0
+- react query >= 5.0
+- react router >=7.0
+- vitest >= 3.0 for unit tests
+- playwright >=1.40 for integration tests
+- Material UI >= 5.0 (included verus-v5-theme-options.ts theme file)
+- Use prettier formatting (included `.prettierrc` config file)
+- Use ESLint linter (included `.eslintrc` config file)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Note the `*rc` files listed above are included without their leading `.` for
+visibility.
 
-## Expanding the ESLint configuration
+## Components
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The separately supplied project mocks are all based on standard MUI 5 Pro
+components. No custom components should be required. Our Storybook component
+library is also included. The Storybook files are static resources that should
+be easy to stand up in your infrastructure. Combined with the theme options file
+included above, it should provide the necessary capabilities to generate
+component code that conforms to our styling and behavior.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Running Storybook
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. Unzip the file
+2. Run `npx http-server storybook-static` in the parent directory (may require
+   install of a package)
+3. If running on your local machine, you should see storybook at
+   http://127.0.0.1:8080/
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+reference:
+https://storybook.js.org/docs/faq#i-see-a-no-preview-error-with-a-storybook-production-build
